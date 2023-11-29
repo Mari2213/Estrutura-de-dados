@@ -52,26 +52,10 @@ public class PriorityQueue {
         return temp;
     }
 
-    public boolean isTimeToServePNE(){ // Verifica se é hora de atender PNE
-        return normalCount > 0 && normalCount % 3 == 0;
-    }
-
-    public No serveNext(){ // Atende o próximo da fila, respeitando a prioridade
+    public No dequeuePNE(){
         if (isEmpty()){
-            System.out.println("Fila vazia");
+            System.out.println("Fila vazia!!");
             return null;
-        }
-
-        if (isTimeToServePNE() && pneCount > 0){
-            return dequeuePNE();
-        }else {
-            return dequeue();
-        }
-    }
-
-    public No dequeuePNE(){ // Remove e retorna o próximo PNE da fila
-        if (front.isPNE){
-            return dequeue();
         }
 
         No current = front;
@@ -83,6 +67,7 @@ public class PriorityQueue {
         }
 
         if (current == null){
+            System.out.println("Nenhum PNE na fila");
             return null;
         }
 
@@ -90,9 +75,32 @@ public class PriorityQueue {
             rear = previous;
         }
 
-        previous.next = current.next;
+        if (previous != null){
+            previous.next = current.next;
+        }else {
+            front = current.next;
+        }
+
         pneCount --;
 
         return current;
+    }
+
+    public No serveNext(){ // Atende o próximo da fila, respeitando a prioridade
+        if (isEmpty()){
+            System.out.println("Fila vazia!!!");
+            return null;
+        }
+
+        if (normalCount < 3){
+            return dequeue();
+        }else if (pneCount > 0){
+            normalCount = 1;
+            return dequeuePNE();
+        }else {
+            System.out.println("Erro");
+            return null;
+        }
+
     }
 }

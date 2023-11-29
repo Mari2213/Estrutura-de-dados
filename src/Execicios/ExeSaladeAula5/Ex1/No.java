@@ -10,4 +10,8 @@ public class No {
         this.isPNE = isPNE;
         this.next = null;
     }
+
+    public String toString(){
+        return "Senha: "+this.senha+", Tipo: "+(this.isPNE ? "PNE" : "Normal");
+    }
 }
