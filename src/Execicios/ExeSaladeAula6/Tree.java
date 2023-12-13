@@ -160,8 +160,41 @@ public class Tree {
         return successor;
     }
 
+    public void printTree(){
+        printTree(this.root);
+    }
+
+    private void printTree(No no){
+        if (no == null){
+            return;
+        }
+
+        // mostra a raiz
+        System.out.print(no.item+" ");
+
+        // mostra o filho à esquerda e se tiver filhos mostra eles
+        if (no.left != null){
+            System.out.print("(");
+            printTree(no.left);
+            System.out.print(")");
+        }else {
+            System.out.print("(sem filho)");
+        }
+
+        // mostra o filho à direita e se tiver filhos mostra eles
+        if (no.right != null){
+            System.out.print(",");
+            printTree(no.right);
+            System.out.print(")");
+        }else {
+            System.out.print("(sem filho)");
+        }
+    }
+
     public void walk(){
-        System.out.print("Em ordem: ");
+        printTree();
+
+        System.out.print("\nEm ordem: ");
         inOrder(root);
         System.out.print("\nEm pós-ordem: ");
         posOrder(root);

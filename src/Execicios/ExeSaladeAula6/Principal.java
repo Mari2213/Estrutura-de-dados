@@ -6,7 +6,7 @@ public class Principal {
     public static void main(String[] args) {
         Scanner le = new Scanner(System.in);
         Tree arv = new Tree();
-
+        // 4, 2, 1, 3, 6, 5, 7
         int op;
         long x;
 
